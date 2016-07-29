@@ -12,8 +12,12 @@ public class Category {
     // TODO: 28/07/2016 for sonet
     // make this class a model table for active android
 
+
     @Column(name = "categoryId")
     public int categoryId;
+
+    @Column(name = "parentId")
+    public int parentId;
 
     @Column (name = "categoryImage")
     public String categoryImage;
