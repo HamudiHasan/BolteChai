@@ -58,6 +58,7 @@ public class MainCategoryActivity extends AppCompatActivity {
                 //delete
              /*   new Delete().from(Category.class).where("categoryId = ?",1).execute();*/
 
+                // Get All Data from DB
                 List<Category> categories = new Select().from(Category.class).where("parentId = ?",1).execute();
                 if (categories.size() > 0) {
 
