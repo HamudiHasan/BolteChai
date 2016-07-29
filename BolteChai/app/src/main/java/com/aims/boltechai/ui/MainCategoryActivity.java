@@ -5,11 +5,21 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.Configuration;
+import com.activeandroid.query.Delete;
+import com.activeandroid.query.Select;
+import com.activeandroid.query.Update;
 import com.aims.boltechai.R;
+import com.aims.boltechai.model.Category;
+
+import java.util.List;
 
 public class MainCategoryActivity extends AppCompatActivity {
 
@@ -22,12 +32,44 @@ public class MainCategoryActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // configure db
+        Configuration.Builder config = new Configuration.Builder(this);
+        config.addModelClasses(Category.class);
+        ActiveAndroid.initialize(config.create());
+
+
         fabAdd = (FloatingActionButton) findViewById(R.id.fab);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Use this to add new categories
-            }
+                Toast.makeText(MainCategoryActivity.this, "This is my Fab !!", Toast.LENGTH_SHORT).show();
+
+                // insert
+               /* Category category = new Category(1,"Sonet","Hasan");
+                category.save();*/
+
+                // update
+              /*  new Update(Category.class)
+                        .set("categoryTitle = ? ","Takvir")
+                        .where("categoryId = ?", 1)
+                        .execute();*/
+
+                //delete
+             /*   new Delete().from(Category.class).where("categoryId = ?",1).execute();*/
+
+                List<Category> categories = new Select().from(Category.class).where("parentId = ?",1).execute();
+                if (categories.size() > 0) {
+
+                    for(int i=0; i<categories.size();i++){
+                        Category category1 = categories.get(i);
+
+                        Log.d("DB Result",category1.categoryTitle+"");
+                    }
+
+                }
+
+                }
         });
     }
 
