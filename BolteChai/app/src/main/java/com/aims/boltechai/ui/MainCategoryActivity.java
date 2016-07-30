@@ -91,8 +91,6 @@ public class MainCategoryActivity extends AppCompatActivity {
                 // Use this to add new categories
 
                 showDialog();
-                Toast.makeText(MainCategoryActivity.this, "This is my Fab !!", Toast.LENGTH_SHORT).show();
-
                 // insert
                /* Category category = new Category(1,"Sonet","Hasan");
                 category.save();*/
