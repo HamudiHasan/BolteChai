@@ -3,8 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     android:gravity="center">
     <TextView
+        android:id="@+id/tv_welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -18,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Start adding new categories by clicking the plus button on the bottom of the screen"
+        android:text="@string/welcome_subtitle"
         android:gravity="center"
         android:textSize="12sp"
         />

@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.activeandroid.util.Log;
 import com.aims.boltechai.R;
-import com.aims.boltechai.model.ActivityItem;
 import com.aims.boltechai.model.Category;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.net.URI;
 import java.util.List;
 
 
@@ -21,10 +23,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private List<Category> list;
     private Context context;
+    private CategoryListener categoryListener;
 
-    public CategoryAdapter(List<Category> list, Context context) {
+    public CategoryAdapter(List<Category> list, Context context, CategoryListener categoryListener) {
         this.list = list;
         this.context = context;
+        this.categoryListener = categoryListener;
     }
 
     @Override
@@ -43,7 +47,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         Log.d("Adapter",item.categoryTitle);
         holder.tvItemTitle.setText(item.categoryTitle);
 
-
+        if(item.categoryImage!= null && !item.categoryImage.isEmpty()) {
+            File f = new File(item.categoryImage);
+            Picasso.with(context).load(f).
+                    into(holder.itemImage);
+        }
+        if(item.categoryAudio==null || item.categoryAudio.isEmpty()) {
+            holder.itemImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    categoryListener.onCategoryClicked(item.getId());
+                }
+            });
+        }
 
     }
 
@@ -69,5 +85,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
 
         }
+    }
+
+    public interface CategoryListener{
+        void onCategoryClicked(long id);
     }
 }
