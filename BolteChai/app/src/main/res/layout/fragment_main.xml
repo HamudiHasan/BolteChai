@@ -9,19 +9,22 @@
     tools:context=".ui.fragment.MainActivityFragment"
     tools:showIn="@layout/activity_main">
 
+
     <ViewFlipper
+        android:id="@+id/view_flipper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
 
         <include
             android:id="@+id/layout_welcome"
-            layout="@layout/layout_welcome_text"/>
+            layout="@layout/layout_welcome_text" />
+
+        <include layout="@layout/layout_recycle_view" />
 
 
     </ViewFlipper>
-
 
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.aims.boltechai.model;
 
+import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
@@ -7,21 +8,43 @@ import com.activeandroid.annotation.Table;
  * Created by Zakir on 17/02/2016.
  */
 
-@Table(name = "Category")
-public class Category {
+@Table(name = "Category", id = "categoryId")
+public class Category extends Model {
     // TODO: 28/07/2016 for sonet
     // make this class a model table for active android
 
-
-    @Column(name = "categoryId")
-    public int categoryId;
+    // for adapter
+    public int id;
 
     @Column(name = "parentId")
     public int parentId;
 
-    @Column (name = "categoryImage")
+    @Column(name = "categoryTitle")
+    public String categoryTitle;
+
+    @Column(name = "categoryImage")
     public String categoryImage;
 
-    @Column (name = "categoryTitle")
-    public String categoryTitle;
+
+    @Column(name = "categoryAudio")
+    public String categoryAudio;
+
+    // constructor for lib
+    public Category() {
+    }
+
+    public Category(int parentId, String categoryTitle, String categoryImage) {
+
+        this.parentId = parentId;
+        this.categoryTitle = categoryTitle;
+        this.categoryImage = categoryImage;
+    }
+
+    public Category(int parentId, String categoryTitle, String categoryImage, String categoryAudio) {
+
+        this.parentId = parentId;
+        this.categoryTitle = categoryTitle;
+        this.categoryImage = categoryImage;
+        this.categoryAudio = categoryAudio;
+    }
 }

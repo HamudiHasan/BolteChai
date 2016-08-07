@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/activity_image"
-        android:src="@drawable/ic_fab_add"
+        android:src="@drawable/back_pikachu"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop" />
