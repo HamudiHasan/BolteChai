@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.aims.boltechai.R;
 import com.aims.boltechai.model.Category;
+import com.aims.boltechai.ui.fragment.AudioDialogFragment;
 import com.aims.boltechai.ui.fragment.ImageDialogFragment;
 import com.squareup.picasso.Picasso;
 
@@ -84,7 +85,19 @@ public class DialogUtils {
             layoutAddAudio.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DialogUtils.getAudioPickerDialog(context
+
+                    AudioDialogFragment audioDialogFragment = new AudioDialogFragment();
+                    audioDialogFragment.setOnAudioSelectionFromGalleryListener(new AudioDialogFragment.OnAudioSelectionFromGalleryListener() {
+                        @Override
+                        public void onAudioSelect(DialogFragment tag, Uri uri) {
+                            Toast.makeText(context, uri.getPath(), Toast.LENGTH_LONG).show();
+
+                           final File f = AppUtils.saveAudioFile(uri, "audio_" + parentId + "_" + SystemClock.uptimeMillis() + ".mp3", context);
+                            category.categoryAudio = f.getPath();
+                        }
+                    });
+                    audioDialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "audio");
+                  /*  DialogUtils.getAudioPickerDialog(context
                             , new AudioItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(String item) {
@@ -96,7 +109,7 @@ public class DialogUtils {
                                         //// // TODO: 07/08/2016 save the path to category and database
                                     }
                                 }
-                            }).show();
+                            }).show();*/
     //                categoryDialogListener.onAudioButtonClicked();
                 }
             });

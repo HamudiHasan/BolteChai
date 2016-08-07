@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
@@ -84,8 +85,9 @@ public class ImageDialogFragment extends DialogFragment implements View.OnClickL
     }
 
     private void openCameraForPhoto() {
-        Intent startCustomCameraIntent = new Intent(getActivity(), CameraActivity.class);
-        startActivityForResult(startCustomCameraIntent, REQUEST_CAMERA);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+       // Intent startCustomCameraIntent = new Intent(getActivity(), CameraActivity.class);
+        //startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
     }
 
     private void openGalleryForPhoto() {
@@ -104,10 +106,14 @@ public class ImageDialogFragment extends DialogFragment implements View.OnClickL
             if (requestCode == GALLERY_REQUEST_CODE || requestCode == REQUEST_CAMERA) {
                 uri = data.getData();
             }
+            if (requestCode == REQUEST_IMAGE_CAPTURE ) {
+                uri = data.getData();
+            }
+            onPhotoSelectionFromGalleryListener.onPhotoSelect(this, uri);
+            this.dismiss();
         }
 
-        onPhotoSelectionFromGalleryListener.onPhotoSelect(this, uri);
-        this.dismiss();
+
     }
 
     public interface OnPhotoSelectionFromGalleryListener {

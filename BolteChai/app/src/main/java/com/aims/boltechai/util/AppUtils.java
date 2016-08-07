@@ -2,6 +2,7 @@ package com.aims.boltechai.util;
 
 import android.content.Context;
 import android.net.Uri;
+import android.widget.Toast;
 
 import com.google.common.base.Strings;
 
@@ -27,10 +28,24 @@ public class AppUtils {
         return imageFile;
     }
 
+    public static File saveAudioFile(Uri uri, String audioName, Context context) {
+
+        if (uri == null || Strings.isNullOrEmpty(audioName))
+            return null;
+
+        final File audioFile = new File(
+                getAudioDirectory(context), audioName);
+        putImageFileInLocalDir(context, audioFile, uri);
+
+        return audioFile;
+    }
+
     public static File getImageDirectory(Context context) {
         return context.getDir("images", Context.MODE_PRIVATE);
     }
-
+    public static File getAudioDirectory(Context context) {
+        return context.getDir("audio", Context.MODE_PRIVATE);
+    }
     public static boolean putImageFileInLocalDir(Context context, File f, Uri uri) {
         try {
             InputStream is = context.getContentResolver().openInputStream(uri);
@@ -44,6 +59,7 @@ public class AppUtils {
             os.close();
             return true;
         } catch (IOException e) {
+            Toast.makeText(context, "Errrrrroooooo", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
             return false;
         }
