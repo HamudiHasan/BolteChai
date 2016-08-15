@@ -59,7 +59,6 @@ public class AppUtils {
             os.close();
             return true;
         } catch (IOException e) {
-            Toast.makeText(context, "Errrrrroooooo", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
             return false;
         }

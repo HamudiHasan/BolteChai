@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -29,6 +31,7 @@ import com.aims.boltechai.model.Category;
 import com.aims.boltechai.ui.MainActivity;
 import com.aims.boltechai.ui.adapter.CategoryAdapter;
 import com.aims.boltechai.util.DialogUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +93,6 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(getContext(), "Loooooooone", Toast.LENGTH_SHORT).show();
                 Category Category = categoriesItems.get(position);
                 DailogLongPress(Category.getId());
             }
@@ -166,6 +168,12 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
 
     public void onAddButtonClicked() {
         DialogUtils.showDialog(getActivity(), new DialogUtils.CategoryDialogListener() {
+
+            @Override
+            public void onUpdate(EditText editText, ImageView imageView, TextView textView) {
+
+            }
+
             @Override
             public void onAudioButtonClicked() {
 
@@ -186,6 +194,22 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
 
     public void onUpdate(final long id) {
         DialogUtils.showDialog(getActivity(), new DialogUtils.CategoryDialogListener() {
+
+            @Override
+            public void onUpdate(EditText editText, ImageView imageView, TextView textView) {
+                List<Category> categories = new Select().from(Category.class).where("categoryId = ?", id).execute();
+                editText.setText(categories.get(0).categoryTitle);
+                if (categories.get(0).categoryImage != null) {
+                    Picasso.with(getContext()).load(categories.get(0).categoryImage.toString()).into(imageView);
+                    imageView.setVisibility(View.VISIBLE);
+                }
+
+                if (categories.get(0).categoryAudio != null) {
+                    textView.setText(categories.get(0).categoryAudio + "");
+                    textView.setVisibility(View.VISIBLE);
+                }
+            }
+
             @Override
             public void onAudioButtonClicked() {
 
@@ -199,7 +223,7 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
             @Override
             public void onSaveButtonClicked(Category categoryItem) {
 
-                Category category = Category.load(Category.class,id);
+                Category category = Category.load(Category.class, id);
                 category.categoryTitle = categoryItem.categoryTitle;
                 category.categoryImage = categoryItem.categoryImage;
                 category.categoryAudio = categoryItem.categoryAudio;
@@ -208,6 +232,8 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
                 categoriesItems.clear();
                 addRecycleItems();
             }
+
+
         }, parentId);
     }
 

@@ -58,7 +58,7 @@ public class DialogUtils {
             final LinearLayout layoutAddImage = (LinearLayout) dialog.findViewById(R.id.layout_add_image);
             final LinearLayout layoutAddAudio = (LinearLayout) dialog.findViewById(R.id.layout_add_audio);
             final TextView tvAudioName = (TextView) dialog.findViewById(R.id.tv_audio_file);
-
+            categoryDialogListener.onUpdate(etCategoryTitle,imagePreview,tvAudioName);
             //final ImageView ivCategoryImage = (ImageView) dialog.findViewById(R.id.iv_category_image_new_category);
 
             Button btnSubmit = (Button) dialog.findViewById(R.id.btn_add_new_category);
@@ -169,13 +169,15 @@ public class DialogUtils {
         return true;
     }
     public interface CategoryDialogListener {
+
+        void onUpdate(EditText editText , ImageView imageView , TextView textView);
         void onAudioButtonClicked();
 
         void onImageButtonClicked();
 
         void onSaveButtonClicked(Category categoryItem);
-    }
 
+    }
     public interface AudioItemSelectedListener {
         void onItemSelected(String item);
     }
