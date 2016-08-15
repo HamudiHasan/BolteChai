@@ -1,6 +1,8 @@
 package com.aims.boltechai.ui.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.activeandroid.query.Delete;
 import com.activeandroid.util.Log;
 import com.aims.boltechai.R;
 import com.aims.boltechai.model.Category;
+import com.aims.boltechai.ui.fragment.ActivityListFragment;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -78,18 +82,21 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 }
             });
         }
-        holder.itemImage.setOnLongClickListener(new View.OnLongClickListener() {
+       /* holder.itemImage.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                DailogLongPress(item.getId()+"");
 
-                Toast.makeText(context, "Looooong Presss", Toast.LENGTH_SHORT).show();
                 return false;
             }
-        });
+        });*/
         // add condition if no audion then go to new
         // if audio then play .
 
     }
+
+
+
 
     @Override
     public int getItemCount() {
