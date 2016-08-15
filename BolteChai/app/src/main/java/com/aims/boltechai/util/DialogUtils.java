@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aims.boltechai.R;
@@ -56,6 +57,7 @@ public class DialogUtils {
             final ImageView imagePreview = (ImageView) dialog.findViewById(R.id.iv_photo_preview);
             final LinearLayout layoutAddImage = (LinearLayout) dialog.findViewById(R.id.layout_add_image);
             final LinearLayout layoutAddAudio = (LinearLayout) dialog.findViewById(R.id.layout_add_audio);
+            final TextView tvAudioName = (TextView) dialog.findViewById(R.id.tv_audio_file);
 
             //final ImageView ivCategoryImage = (ImageView) dialog.findViewById(R.id.iv_category_image_new_category);
 
@@ -93,6 +95,8 @@ public class DialogUtils {
                             Toast.makeText(context, uri.getPath(), Toast.LENGTH_LONG).show();
 
                            final File f = AppUtils.saveAudioFile(uri, "audio_" + parentId + "_" + SystemClock.uptimeMillis() + ".mp3", context);
+                            tvAudioName.setText(uri.getPath()+".mp3");
+                            tvAudioName.setVisibility(View.VISIBLE);
                             category.categoryAudio = f.getPath();
                         }
                     });
@@ -117,12 +121,17 @@ public class DialogUtils {
             btnSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //category = new Category(1, etCategoryTitle.getText().toString(), "Hasan");
-                    category.parentId = parentId;
-                    category.categoryTitle = etCategoryTitle.getText().toString();
-                    dialog.dismiss();
-                    categoryDialogListener.onSaveButtonClicked(category);
-
+                    if(!isEmpty(etCategoryTitle))
+                    {
+                        //category = new Category(1, etCategoryTitle.getText().toString(), "Hasan");
+                        category.parentId = parentId;
+                        category.categoryTitle = etCategoryTitle.getText().toString();
+                        dialog.dismiss();
+                        categoryDialogListener.onSaveButtonClicked(category);
+                    }
+                    else {
+                        Toast.makeText(context, "Please give a Category title", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -152,6 +161,13 @@ public class DialogUtils {
         return builder;
     }
 
+    private static boolean isEmpty(EditText etText) {
+        // check EditText empty or not
+        if (etText.getText().toString().trim().length() > 0)
+            return false;
+
+        return true;
+    }
     public interface CategoryDialogListener {
         void onAudioButtonClicked();
 

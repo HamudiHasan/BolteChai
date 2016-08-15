@@ -46,7 +46,7 @@ public class ImageDialogFragment extends DialogFragment implements View.OnClickL
         btnOpenCamera = (Button) view.findViewById(R.id.btnTakePhotoFromCamera);
         btnOpenGallery = (Button) view.findViewById(R.id.btnUploadFromGallery);
         context = getActivity();
-        getDialog().setTitle("Select Photo");
+       // getDialog().setTitle("Select Photo");
 
         btnOpenCamera.setOnClickListener(this);
         btnOpenGallery.setOnClickListener(this);
@@ -86,8 +86,8 @@ public class ImageDialogFragment extends DialogFragment implements View.OnClickL
 
     private void openCameraForPhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-       // Intent startCustomCameraIntent = new Intent(getActivity(), CameraActivity.class);
-        //startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+        Intent startCustomCameraIntent = new Intent(getActivity(), CameraActivity.class);
+        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
     }
 
     private void openGalleryForPhoto() {

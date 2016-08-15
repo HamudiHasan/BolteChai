@@ -128,6 +128,23 @@
                 android:adjustViewBounds="true"
                 android:scaleType="center" />
         </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_audio_file"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@drawable/audio_file"
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:text="File.mp3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </TextView>
+        </android.support.v7.widget.CardView>
 
 
         <LinearLayout

@@ -47,7 +47,7 @@ public class AudioDialogFragment extends DialogFragment implements View.OnClickL
         btnRecordAudio = (Button) view.findViewById(R.id.btnRecordAudio);
         btnOpenGallery = (Button) view.findViewById(R.id.btnAudioUploadFromGallery);
         context = getActivity();
-        getDialog().setTitle("Select Audio");
+        //getDialog().setTitle("Select Audio");
 
         btnRecordAudio.setOnClickListener(this);
         btnOpenGallery.setOnClickListener(this);
@@ -69,7 +69,7 @@ public class AudioDialogFragment extends DialogFragment implements View.OnClickL
 
 
         } else if (btnOpenGallery == v) {
-            Toast.makeText(context, "Opening Gallery....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Opening library....", Toast.LENGTH_SHORT).show();
             btnPickAudio();
         }
     }
@@ -93,7 +93,7 @@ public class AudioDialogFragment extends DialogFragment implements View.OnClickL
                 uri = data.getData();
             }
             if(requestCode == ACTIVITY_RECORD_SOUND){
-                Log.d("Resutl", "ACTIVITY_RECORD_SOUND"+data.getData());
+                //Log.d("Result", "ACTIVITY_RECORD_SOUND"+data.getData());
                uri = data.getData();
             }
             onAudioSelectionFromGalleryListener.onAudioSelect(this, uri);
