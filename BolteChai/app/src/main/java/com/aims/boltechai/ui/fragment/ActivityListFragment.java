@@ -6,12 +6,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -33,6 +35,8 @@ import com.aims.boltechai.ui.adapter.CategoryAdapter;
 import com.aims.boltechai.util.DialogUtils;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -200,7 +204,8 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
                 List<Category> categories = new Select().from(Category.class).where("categoryId = ?", id).execute();
                 editText.setText(categories.get(0).categoryTitle);
                 if (categories.get(0).categoryImage != null) {
-                    Picasso.with(getContext()).load(categories.get(0).categoryImage.toString()).into(imageView);
+                    File f = new File(categories.get(0).categoryImage.toString());
+                    Picasso.with(getContext()).load(f).into(imageView);
                     imageView.setVisibility(View.VISIBLE);
                 }
 
@@ -224,9 +229,16 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
             public void onSaveButtonClicked(Category categoryItem) {
 
                 Category category = Category.load(Category.class, id);
-                category.categoryTitle = categoryItem.categoryTitle;
-                category.categoryImage = categoryItem.categoryImage;
-                category.categoryAudio = categoryItem.categoryAudio;
+
+                if (categoryItem.categoryTitle != null)
+                    category.categoryTitle = categoryItem.categoryTitle;
+
+                if (categoryItem.categoryImage != null)
+                    category.categoryImage = categoryItem.categoryImage;
+
+                if (categoryItem.categoryAudio != null)
+                    category.categoryAudio = categoryItem.categoryAudio;
+
                 category.save();
 
                 categoriesItems.clear();
