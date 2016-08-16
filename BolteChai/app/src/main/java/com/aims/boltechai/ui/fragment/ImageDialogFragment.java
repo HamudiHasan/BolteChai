@@ -85,9 +85,8 @@ public class ImageDialogFragment extends DialogFragment implements View.OnClickL
     }
 
     private void openCameraForPhoto() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         Intent startCustomCameraIntent = new Intent(getActivity(), CameraActivity.class);
-        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+        startActivityForResult(startCustomCameraIntent, REQUEST_IMAGE_CAPTURE);
     }
 
     private void openGalleryForPhoto() {
