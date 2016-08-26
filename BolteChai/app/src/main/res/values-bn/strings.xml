@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Bolte Chai</string>
+    <string name="action_settings">সেটিংস্‌</string>
+    <string name="welcome_text">বলতে চাইতে আপনার স্বাগতম</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_subtitle">নতুন ক্যাটাগরি যোগ করতে স্কিনের গোল যোগ বানটি চাপুন </string>
+    <string name="action_language">ভাষা পরিবর্তন</string>
+    <string name="food_name">খাবার</string>
+    <string name="select_audio">শব্দ নির্বাচন করুণ</string>
+    <string name="library">লাইব্রেরি</string>
+    <string name="record">Record</string>
+    <string name="select_image">ছবি  নির্বাচন করুণ</string>
+    <string name="album">অ্যাল্বাম</string>
+    <string name="camera">ক্যামেরা</string>
+    <string name="add_new_category">নতুন ক্যাটাগরি</string>
+    <string name="category_title">ক্যাটাগরির নাম </string>
+    <string name="add_audio">শব্দ যোগ করুণ</string>
+    <string name="add_image">ছবি যোগ করুণ </string>
+    <string name="cancel">বাতিল</string>
+    <string name="save">সংরক্ষন</string>
+
+    <string name="toast_empty_catagory">ক্যাটাগরির নাম দিন </string>
+    <string name="action_column">সারির সংখ্যা</string>
+    <string name="str_hint_numb_column">সারির সংখ্যা</string>
+    <string name="column_error">সারির সংখ্যা ১ থেকে ৪ এর মধ্যে নির্বাচন করুণ </string>
+    <string name="checkbox_catagory"> ক্যাটাগরি না </string>
+
+    <string name="child_mode">শিশু মোড</string>
+    <string name="parent_mode">অভিভাবক মোড </string>
+</resources>
