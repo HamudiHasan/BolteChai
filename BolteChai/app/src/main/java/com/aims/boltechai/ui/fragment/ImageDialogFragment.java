@@ -23,14 +23,14 @@ import com.desmond.squarecamera.CameraActivity;
 /**
  *
  */
-public class ImageDialogFragment extends DialogFragment implements View.OnClickListener,ActivityCompat.OnRequestPermissionsResultCallback {
+public class ImageDialogFragment extends DialogFragment implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     public static final int GALLERY_REQUEST_CODE = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
     private static final int REQUEST_CAMERA = 0;
     private View view;
-    private Button btnOpenGallery;
-    private Button btnOpenCamera;
+    private View btnOpenGallery;
+    private View btnOpenCamera;
     private Context context;
     private OnPhotoSelectionFromGalleryListener onPhotoSelectionFromGalleryListener;
     private Uri uri;
@@ -43,10 +43,10 @@ public class ImageDialogFragment extends DialogFragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dialog_photo_chooser, container, false);
-        btnOpenCamera = (Button) view.findViewById(R.id.btnTakePhotoFromCamera);
-        btnOpenGallery = (Button) view.findViewById(R.id.btnUploadFromGallery);
+        btnOpenCamera = view.findViewById(R.id.btnTakePhotoFromCamera);
+        btnOpenGallery = view.findViewById(R.id.btnUploadFromGallery);
         context = getActivity();
-       // getDialog().setTitle("Select Photo");
+        // getDialog().setTitle("Select Photo");
 
         btnOpenCamera.setOnClickListener(this);
         btnOpenGallery.setOnClickListener(this);
@@ -64,20 +64,20 @@ public class ImageDialogFragment extends DialogFragment implements View.OnClickL
         if (btnOpenCamera == v) {
             Toast.makeText(context, "Opening Camera....", Toast.LENGTH_SHORT).show();
 
-                final String permission = Manifest.permission.CAMERA;
-                if (ContextCompat.checkSelfPermission(getActivity(), permission)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
-                        // Show permission rationale
-                    } else {
-                        // Handle the result in Activity#onRequestPermissionResult(int, String[], int[])
-                        ActivityCompat.requestPermissions(getActivity(), new String[]{
-                                permission,Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CAMERA_PERMISSION);
-                    }
+            final String permission = Manifest.permission.CAMERA;
+            if (ContextCompat.checkSelfPermission(getActivity(), permission)
+                    != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
+                    // Show permission rationale
                 } else {
-                    // Start CameraActivity
-                    openCameraForPhoto();
+                    // Handle the result in Activity#onRequestPermissionResult(int, String[], int[])
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{
+                            permission, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CAMERA_PERMISSION);
                 }
+            } else {
+                // Start CameraActivity
+                openCameraForPhoto();
+            }
         } else if (btnOpenGallery == v) {
             Toast.makeText(context, "Opening Gallery....", Toast.LENGTH_SHORT).show();
             openGalleryForPhoto();
@@ -105,7 +105,7 @@ public class ImageDialogFragment extends DialogFragment implements View.OnClickL
             if (requestCode == GALLERY_REQUEST_CODE || requestCode == REQUEST_CAMERA) {
                 uri = data.getData();
             }
-            if (requestCode == REQUEST_IMAGE_CAPTURE ) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 uri = data.getData();
             }
             onPhotoSelectionFromGalleryListener.onPhotoSelect(this, uri);
@@ -129,7 +129,7 @@ public class ImageDialogFragment extends DialogFragment implements View.OnClickL
                     openCameraForPhoto();
                 } else {
                     //code for deny
-                    Toast.makeText(getContext(),"Couldn't open camera. Permission denied by the user",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Couldn't open camera. Permission denied by the user", Toast.LENGTH_LONG).show();
                 }
                 break;
         }

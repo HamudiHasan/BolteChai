@@ -11,10 +11,13 @@ import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -58,6 +61,20 @@ public class DialogUtils {
             final LinearLayout layoutAddImage = (LinearLayout) dialog.findViewById(R.id.layout_add_image);
             final LinearLayout layoutAddAudio = (LinearLayout) dialog.findViewById(R.id.layout_add_audio);
             final TextView tvAudioName = (TextView) dialog.findViewById(R.id.tv_audio_file);
+            final CheckBox categoryCheckbox = (CheckBox) dialog.findViewById(R.id.category_checkbox);
+            final CardView audioCard = (CardView) dialog.findViewById(R.id.audioCard);
+
+            categoryCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked){
+                        audioCard.setVisibility(View.GONE);
+                    }
+                    else{
+                        audioCard.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
             categoryDialogListener.onUpdate(etCategoryTitle,imagePreview,tvAudioName);
             //final ImageView ivCategoryImage = (ImageView) dialog.findViewById(R.id.iv_category_image_new_category);
 
@@ -130,7 +147,7 @@ public class DialogUtils {
                         categoryDialogListener.onSaveButtonClicked(category);
                     }
                     else {
-                        Toast.makeText(context, "Please give a Category title", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.toast_empty_catagory, Toast.LENGTH_SHORT).show();
                     }
                 }
             });

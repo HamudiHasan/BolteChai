@@ -32,7 +32,7 @@
                 android:id="@+id/activity_title"
                 android:layout_width="wrap_content"
                 android:textSize="18sp"
-                tools:text="খাবার"
+                tools:text="@string/food_name"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"

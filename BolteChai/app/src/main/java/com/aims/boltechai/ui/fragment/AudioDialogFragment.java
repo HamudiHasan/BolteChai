@@ -30,8 +30,8 @@ public class AudioDialogFragment extends DialogFragment implements View.OnClickL
     private static final int ACTIVITY_RECORD_SOUND = 2;
     private static final int REQUEST_CAMERA = 0;
     private View view;
-    private Button btnOpenGallery;
-    private Button btnRecordAudio;
+    private View btnOpenGallery;
+    private View btnRecordAudio;
     private Context context;
     private OnAudioSelectionFromGalleryListener onAudioSelectionFromGalleryListener;
     private Uri uri;
@@ -44,8 +44,8 @@ public class AudioDialogFragment extends DialogFragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dialog_audio_chooser, container, false);
-        btnRecordAudio = (Button) view.findViewById(R.id.btnRecordAudio);
-        btnOpenGallery = (Button) view.findViewById(R.id.btnAudioUploadFromGallery);
+        btnRecordAudio =  view.findViewById(R.id.btnRecordAudio);
+        btnOpenGallery =  view.findViewById(R.id.btnAudioUploadFromGallery);
         context = getActivity();
         //getDialog().setTitle("Select Audio");
 

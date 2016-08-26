@@ -6,14 +6,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,16 +26,14 @@ import android.widget.ViewFlipper;
 
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
-import com.activeandroid.query.Update;
 import com.aims.boltechai.R;
 import com.aims.boltechai.model.Category;
-import com.aims.boltechai.ui.MainActivity;
+import com.aims.boltechai.ui.activity.MainActivity;
 import com.aims.boltechai.ui.adapter.CategoryAdapter;
 import com.aims.boltechai.util.DialogUtils;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +55,8 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
     private int parentId;
     private TextView tvWelcomeText;
 
+    int spanNumb = 2;
+
     public ActivityListFragment() {
         // Required empty public constructor
     }
@@ -75,7 +74,9 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
         tvWelcomeText = (TextView) rootView.findViewById(R.id.tv_welcome_text);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_main_category);
-        gridLayout = new GridLayoutManager(getActivity(), 2);
+
+        spanNumb = getSpanNumb("BolteChaiImage");
+        gridLayout = new GridLayoutManager(getActivity(), spanNumb);
         recyclerView.setLayoutManager(gridLayout);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new CategoryAdapter(categoriesItems, getActivity(), this);
@@ -102,6 +103,11 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
             }
         }));
         return rootView;
+    }
+
+    private int getSpanNumb(String name) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        return preferences.getInt(name, 2);
     }
 
     public interface ClickListener {
@@ -285,5 +291,6 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
         });
         builder.show();
     }
+
 
 }

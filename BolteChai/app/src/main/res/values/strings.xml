@@ -6,4 +6,26 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome_subtitle">To add new categories click the plus button on the bottom of the screen</string>
+    <string name="action_language">Change language</string>
+    <string name="food_name">Food Name</string>
+    <string name="select_audio">Select Audio</string>
+    <string name="library">Library</string>
+    <string name="record">Record</string>
+    <string name="select_image">Select Image</string>
+    <string name="album">Album</string>
+    <string name="camera">Camera</string>
+    <string name="add_new_category">Add New Category</string>
+    <string name="category_title">Category Title</string>
+    <string name="add_audio">Add Audio</string>
+    <string name="add_image">Add Image</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="toast_empty_catagory">Please give a Category title</string>
+    <string name="action_column">Number Of Rows</string>
+    <string name="str_hint_numb_column">Number of columns</string>
+    <string name="column_error">Please Select Number between 0-4</string>
+    <string name="checkbox_catagory">It is not a Category</string>
+    <string name="action_user_mode">Child</string>
+    <string name="child_mode">Child Mode</string>
+    <string name="parent_mode">Parent Mode</string>
 </resources>
