@@ -21,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
@@ -50,9 +51,13 @@ public class MainActivity extends AppCompatActivity {
         config.addModelClasses(Category.class);
         ActiveAndroid.initialize(config.create());
         activeFragment = new ActivityListFragment();
-       // setLanguage();
+        setLanguage();
         if (isFirstTime()) {
-            startActivity(new Intent(MainActivity.this, MasterLoginActivity.class));
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("BolteChaiFirstTime", "no");
+            editor.putString("BolteChaiRole", "Parent");
+            editor.commit();
         }
 
         fabAdd = (FloatingActionButton) findViewById(R.id.fab);
@@ -77,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
                 , "main_fragment").commit();
     }
 
+    private void setLanguage() {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String ln= preferences.getString("BolteChaiLanguage", "en");
+        setLocale(ln);
+
+    }
+
     private boolean isFirstTime() {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -92,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         if (getRoleName().equals("Parent")) {
-            menu.getItem(3).setTitle(R.string.child_mode);
+            menu.getItem(2).setTitle(R.string.child_mode);
         } else {
-            menu.getItem(3).setTitle(R.string.parent_mode);
+            menu.getItem(2).setTitle(R.string.parent_mode);
         }
         return true;
     }
@@ -121,9 +134,11 @@ public class MainActivity extends AppCompatActivity {
 
                     if (items[item].equals("Bangla")) {
                         setLocale("bn");
+                        restartActivity();
                         dialog.dismiss();
                     } else if (items[item].equals("English")) {
                         setLocale("en");
+                        restartActivity();
                         dialog.dismiss();
 
                     } else if (items[item].equals("Cancel")) {
@@ -154,6 +169,9 @@ public class MainActivity extends AppCompatActivity {
                 restartActivity();
             }
 
+        }
+        else if (id == R.id.action_help){
+            Toast.makeText(MainActivity.this, "Helpppppppp!!", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
@@ -193,9 +211,9 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("BolteChaiLanguage", lang);
         editor.commit();
 
-        Intent refresh = new Intent(this, MainActivity.class);
+       /* Intent refresh = new Intent(this, MainActivity.class);
         startActivity(refresh);
-        finish();
+        finish();*/
     }
 
     public void showDialog() {
@@ -213,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         Button popBtnCancel = (Button) dialog.findViewById(R.id.btn_cancel_dialoug_column);
         Button popBtnSave = (Button) dialog.findViewById(R.id.btn_save_dialoug_column);
 
+        etColumnsNumber.setText(getSpanNumb("BolteChaiImage")+"");
         popBtnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -239,6 +258,63 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
     }
 
+    private void languageSelection() {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.layout_language_selection);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+        View viewEnglish = dialog.findViewById(R.id.layout_language_english);
+        View viewBangla = dialog.findViewById(R.id.layout_language_bangla);
+
+        final ImageView ivBangla = (ImageView) dialog.findViewById(R.id.iv_cb_bangla);
+        final ImageView ivEnglish = (ImageView) dialog.findViewById(R.id.iv_cb_english);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String ln = preferences.getString("KothaLanguage", "en");
+
+        if(ln.equals("en")){
+
+            ivEnglish.setVisibility(View.VISIBLE);
+        }
+        else if(ln.equals("bn")){
+
+            ivBangla.setVisibility(View.VISIBLE);
+        }
+
+        viewBangla.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivEnglish.setVisibility(View.GONE);
+                ivBangla.setVisibility(View.VISIBLE);
+                setLocale("bn");
+                dialog.dismiss();
+                restartActivity();
+            }
+        });
+
+        viewEnglish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivBangla.setVisibility(View.GONE);
+                ivEnglish.setVisibility(View.VISIBLE);
+                setLocale("en");
+                dialog.dismiss();
+                restartActivity();
+            }
+        });
+
+        dialog.show();
+    }
+    private int getSpanNumb(String name) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        return preferences.getInt(name, 2);
+    }
     private static boolean isValidColumn(EditText etText) {
         // check EditText empty or not
         if (etText.getText().toString().trim().length() > 0) {

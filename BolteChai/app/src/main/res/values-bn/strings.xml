@@ -10,7 +10,7 @@
     <string name="food_name">খাবার</string>
     <string name="select_audio">শব্দ নির্বাচন করুণ</string>
     <string name="library">লাইব্রেরি</string>
-    <string name="record">Record</string>
+    <string name="record">রেকোর্ড</string>
     <string name="select_image">ছবি  নির্বাচন করুণ</string>
     <string name="album">অ্যাল্বাম</string>
     <string name="camera">ক্যামেরা</string>
@@ -25,8 +25,11 @@
     <string name="action_column">সারির সংখ্যা</string>
     <string name="str_hint_numb_column">সারির সংখ্যা</string>
     <string name="column_error">সারির সংখ্যা ১ থেকে ৪ এর মধ্যে নির্বাচন করুণ </string>
-    <string name="checkbox_catagory"> ক্যাটাগরি না </string>
+    <string name="checkbox_catagory"> ক্যাটাগরি </string>
 
     <string name="child_mode">শিশু মোড</string>
     <string name="parent_mode">অভিভাবক মোড </string>
+
+    <string name="set_number_of_column">সারির সংখ্যা নির্ধারন</string>
+    <string name="string_help">Help</string>
 </resources>

@@ -21,11 +21,13 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="toast_empty_catagory">Please give a Category title</string>
-    <string name="action_column">Number Of Rows</string>
+    <string name="action_column">Set number of columns</string>
     <string name="str_hint_numb_column">Number of columns</string>
-    <string name="column_error">Please Select Number between 0-4</string>
-    <string name="checkbox_catagory">It is not a Category</string>
+    <string name="column_error">Please Select Number between 1-4</string>
+    <string name="checkbox_catagory">It is a Category</string>
     <string name="action_user_mode">Child</string>
     <string name="child_mode">Child Mode</string>
     <string name="parent_mode">Parent Mode</string>
+    <string name="set_number_of_column">Set number of Columns</string>
+    <string name="string_help">Help</string>
 </resources>

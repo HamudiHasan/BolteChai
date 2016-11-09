@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.activity.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_language"
         android:orderInCategory="100"
         android:title="@string/action_language"
@@ -22,5 +17,11 @@
         android:id="@+id/action_user_mode"
         android:orderInCategory="100"
         android:title="@string/action_user_mode"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_help"
+        android:orderInCategory="100"
+        android:title="@string/string_help"
         app:showAsAction="never" />
 </menu>
