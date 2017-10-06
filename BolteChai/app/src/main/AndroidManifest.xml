@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -18,7 +19,6 @@
         tools:replace="android:theme">
         <activity
             android:name=".ui.activity.MainActivity"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,9 +33,17 @@
             android:value="autismDB.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="2" />
+            android:value="6" />
 
-        <activity android:name=".ui.activity.MasterLoginActivity"></activity>
+        <activity android:name=".ui.activity.MasterLoginActivity" />
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:label="About Us"
+            android:parentActivityName=".ui.activity.MainActivity" />
+        <activity
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:label="@string/string_help"
+            android:name=".ui.activity.HelpActivity"></activity>
     </application>
 
 </manifest>

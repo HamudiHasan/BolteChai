@@ -31,5 +31,12 @@
     <string name="parent_mode">অভিভাবক মোড </string>
 
     <string name="set_number_of_column">সারির সংখ্যা নির্ধারন</string>
-    <string name="string_help">Help</string>
+    <string name="string_help">সাহায্য</string>
+    <string name="srt_name">নাম</string>
+    <string name="add_new_help_contract">সাহায্যকারী যোগ</string>
+
+    <string name="string_set_help">সাহায্যকারী নির্ধারণ</string>
+    <string name="phone_number">মোবাইল নম্বর</string>
+    <string name="action_user_mode">Child</string>
+    <string name="string_about">আমাদের কথা</string>
 </resources>

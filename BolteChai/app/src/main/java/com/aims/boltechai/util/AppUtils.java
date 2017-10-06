@@ -16,6 +16,15 @@ import java.io.InputStream;
  */
 public class AppUtils {
 
+    public static String BOLTE_CHAI_INITIAL = "BolteChaiFirstTime";
+    public static String BOLTE_CHAI_LANGUAGE = "BolteChaiLanguage";
+    public static String BOLTE_CHAI_IMAGE = "BolteChaiImage";
+    public static String BOLTE_CHAI_ROLE = "BolteChaiRole";
+    public static String MODE_PARENT = "Parent";
+    public static String MODE_CHILD = "Child";
+    public static String STR_NO = "no";
+    public static String STR_YES = "yes";
+
     public static File saveImageFile(Uri uri, String imageName, Context context) {
 
         if (uri == null || Strings.isNullOrEmpty(imageName))

@@ -1,8 +1,6 @@
 package com.aims.boltechai.ui.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,21 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import com.activeandroid.query.Delete;
 import com.activeandroid.util.Log;
 import com.aims.boltechai.R;
 import com.aims.boltechai.model.Category;
-import com.aims.boltechai.ui.fragment.ActivityListFragment;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.net.URI;
 import java.util.List;
 
-
+/**
+ * Adapter for Category Recycle view
+ */
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private List<Category> list;
@@ -82,21 +77,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 }
             });
         }
-       /* holder.itemImage.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                DailogLongPress(item.getId()+"");
-
-                return false;
-            }
-        });*/
-        // add condition if no audion then go to new
-        // if audio then play .
 
     }
-
-
-
 
     @Override
     public int getItemCount() {
@@ -109,12 +91,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         ImageView itemImage;
         TextView tvItemTitle;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
 
             // get the references of view components here
-
             itemImage = (ImageView) itemView.findViewById(R.id.activity_image);
             tvItemTitle = (TextView) itemView.findViewById(R.id.activity_title);
 
@@ -122,6 +102,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         }
     }
 
+    // Category click event listener
     public interface CategoryListener {
         void onCategoryClicked(long id);
     }

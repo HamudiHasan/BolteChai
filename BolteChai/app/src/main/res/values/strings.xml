@@ -30,4 +30,9 @@
     <string name="parent_mode">Parent Mode</string>
     <string name="set_number_of_column">Set number of Columns</string>
     <string name="string_help">Help</string>
+    <string name="string_set_help">Set Help Contacts</string>
+    <string name="phone_number">Mobile number</string>
+    <string name="srt_name">Name</string>
+    <string name="add_new_help_contract">Add new Help Contact</string>
+    <string name="string_about">About Us</string>
 </resources>

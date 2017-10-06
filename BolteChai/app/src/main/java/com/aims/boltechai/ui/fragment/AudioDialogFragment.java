@@ -22,7 +22,7 @@ import com.desmond.squarecamera.CameraActivity;
 
 
 /**
- *
+ * Dialog Fragment for Audio
  */
 public class AudioDialogFragment extends DialogFragment implements View.OnClickListener,ActivityCompat.OnRequestPermissionsResultCallback {
 

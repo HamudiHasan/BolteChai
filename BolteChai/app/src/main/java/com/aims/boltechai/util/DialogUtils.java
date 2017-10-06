@@ -6,8 +6,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -140,9 +142,14 @@ public class DialogUtils {
                 public void onClick(View v) {
                     if(!isEmpty(etCategoryTitle))
                     {
+
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences((context));
+                        String ln = preferences.getString("BolteChaiLanguage", "en");
+
                         //category = new Category(1, etCategoryTitle.getText().toString(), "Hasan");
                         category.parentId = parentId;
                         category.categoryTitle = etCategoryTitle.getText().toString();
+                        category.language =ln;
                         dialog.dismiss();
                         categoryDialogListener.onSaveButtonClicked(category);
                     }

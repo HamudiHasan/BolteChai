@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,6 +31,7 @@ import com.aims.boltechai.R;
 import com.aims.boltechai.model.Category;
 import com.aims.boltechai.ui.activity.MainActivity;
 import com.aims.boltechai.ui.adapter.CategoryAdapter;
+import com.aims.boltechai.util.AppUtils;
 import com.aims.boltechai.util.DialogUtils;
 import com.squareup.picasso.Picasso;
 
@@ -43,8 +45,6 @@ import java.util.List;
 public class ActivityListFragment extends Fragment implements CategoryAdapter.CategoryListener {
 
     private static final int REQUEST_CODE_RECORD = 1;
-    private static final int SELECT_IMAGE_FILE = 2;
-    private static final String PHOTO_IMAGE_CHOOSER = "photo_category";
     public static final String PARENT_ID = "parentId";
     private List<Category> categoriesItems = new ArrayList<Category>();
     private View rootView;
@@ -54,8 +54,7 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
     private CategoryAdapter adapter;
     private int parentId;
     private TextView tvWelcomeText;
-
-    int spanNumb = 2;
+    private int spanNumb = 2;
 
     public ActivityListFragment() {
         // Required empty public constructor
@@ -70,17 +69,18 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
         if (getArguments() != null) {
             parentId = (int) getArguments().getLong(PARENT_ID);
         }
+
         viewFlipper = (ViewFlipper) rootView.findViewById(R.id.view_flipper);
         tvWelcomeText = (TextView) rootView.findViewById(R.id.tv_welcome_text);
-
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_main_category);
-
         spanNumb = getSpanNumb("BolteChaiImage");
+
         gridLayout = new GridLayoutManager(getActivity(), spanNumb);
         recyclerView.setLayoutManager(gridLayout);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new CategoryAdapter(categoriesItems, getActivity(), this);
         recyclerView.setAdapter(adapter);
+
         addRecycleItems();
         if (parentId == 0) {
             getActivity().setTitle(R.string.app_name);
@@ -99,7 +99,9 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
             @Override
             public void onLongClick(View view, int position) {
                 Category Category = categoriesItems.get(position);
-                DailogLongPress(Category.getId());
+                if (!getRoleName().equals(AppUtils.MODE_CHILD)) {
+                    DailogLongPress(Category.getId());
+                }
             }
         }));
         return rootView;
@@ -161,7 +163,13 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
     }
 
     public void addRecycleItems() {
-        List<Category> categories = new Select().from(Category.class).where("parentId = ?", parentId).execute();
+        categoriesItems.clear();
+
+        String lang;
+        lang = getLanguage();
+
+        // Read from Database
+        List<Category> categories = new Select().from(Category.class).where("parentId = ? and language = ?", parentId, lang).execute();
         if (categories.size() > 0) {
             categoriesItems.clear();
             viewFlipper.setDisplayedChild(1);
@@ -292,5 +300,18 @@ public class ActivityListFragment extends Fragment implements CategoryAdapter.Ca
         builder.show();
     }
 
+    public String getLanguage() {
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        String ln = preferences.getString(AppUtils.BOLTE_CHAI_LANGUAGE, "en");
+        if (ln == null) {
+            ln = "en";
+        }
+        return ln;
+    }
+
+    public String getRoleName() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        return preferences.getString(AppUtils.BOLTE_CHAI_ROLE, AppUtils.MODE_PARENT);
+    }
 }

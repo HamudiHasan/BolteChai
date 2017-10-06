@@ -21,7 +21,7 @@ import com.desmond.squarecamera.CameraActivity;
 
 
 /**
- *
+ *Dialog Fragment for Image
  */
 public class ImageDialogFragment extends DialogFragment implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 

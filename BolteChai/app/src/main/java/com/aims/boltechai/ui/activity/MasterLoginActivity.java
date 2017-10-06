@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.aims.boltechai.R;
-
+/**
+ * Login Page for Future
+ */
 public class MasterLoginActivity extends AppCompatActivity {
 
     EditText etUserName;

@@ -29,22 +29,27 @@ public class Category extends Model {
     @Column(name = "categoryAudio")
     public String categoryAudio;
 
+    @Column(name = "language")
+    public String language;
+
     // constructor for lib
     public Category() {
     }
 
-    public Category(int parentId, String categoryTitle, String categoryImage) {
+    public Category(int parentId, String categoryTitle, String categoryImage,String language) {
 
         this.parentId = parentId;
         this.categoryTitle = categoryTitle;
         this.categoryImage = categoryImage;
+        this.language = language;
     }
 
-    public Category(int parentId, String categoryTitle, String categoryImage, String categoryAudio) {
+    public Category(int parentId, String categoryTitle, String categoryImage, String categoryAudio , String language) {
 
         this.parentId = parentId;
         this.categoryTitle = categoryTitle;
         this.categoryImage = categoryImage;
         this.categoryAudio = categoryAudio;
+        this.language = language;
     }
 }
